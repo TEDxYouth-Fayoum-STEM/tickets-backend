@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "rootDir": "src",
+    "outDir": "build",
+    "module": "commonjs",
+    "target": "es2017",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "strictBindCallApply": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "allowSyntheticDefaultImports": true,
+    "noFallthroughCasesInSwitch": false,
+    "allowJs": false,
+    "resolveJsonModule": true,
+    "paths": {
+      "@d": ["src/data/index"],
+      "@db": ["src/db/store"],
+      "@m/*": ["src/models/*"],
+      "@v": ["src/utils/validation"],
+      "@env": ["src/config/env"],
+      "@c/*": ["src/config/*.json"],
+      "@u/*": ["src/utils/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
