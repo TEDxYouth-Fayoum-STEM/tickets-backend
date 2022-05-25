@@ -1,6 +1,9 @@
+import "reflect-metadata";
 import express from "express";
 import bodyParser from "body-parser";
+import cors from "cors";
 import env from "@env";
+import cloudinary from "./db/cloud";
 import bootstrapDb from "./db/middleware";
 import { router, handleError } from "./router";
 
@@ -9,10 +12,17 @@ async function bootstrap(): Promise<void> {
 
   // middlewares
   app.use(
+    cors({
+      origin: env.frontendHost
+    })
+  );
+
+  app.use(
     bodyParser.json({
       limit: env.req.maxBodySize
     })
   );
+  app.use(cloudinary());
   console.log("Connecting to database servers");
   app.use(await bootstrapDb());
   console.log("Connected to database servers!");

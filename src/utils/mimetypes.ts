@@ -1,1 +1,1 @@
-export const image = /^image\/(jpeg|png)$/;
+export const image = /^image\/[A-z]+$/;

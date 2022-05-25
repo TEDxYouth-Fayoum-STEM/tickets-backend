@@ -4,7 +4,6 @@ import config from "@c/db";
 
 // stores
 import { TicketsStore } from "@m/tickets/store";
-import { PromocodesStore } from "@m/promocodes";
 import { LogsStore } from "@m/logs";
 
 // connection
@@ -17,14 +16,12 @@ async function connectDb(): Promise<Db> {
 // database stores interface
 export interface IDb {
   tickets: TicketsStore;
-  promocodes: PromocodesStore;
   logs: LogsStore;
 }
 // stores initialization
 export function initializeStores(db: Db): IDb {
   return {
     tickets: new TicketsStore(db),
-    promocodes: new PromocodesStore(db),
     logs: new LogsStore(db)
   };
 }

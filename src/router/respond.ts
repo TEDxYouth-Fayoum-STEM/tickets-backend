@@ -16,7 +16,12 @@ function getStatusCode(result: RouteRes) {
 
 export function sendResponse(res: ApiRes, result: RouteRes): void {
   const code = getStatusCode(result);
-  const status = code >= 400 ? false : true;
+  const status =
+    typeof result === "object" && typeof result.status === "boolean"
+      ? result.status
+      : code >= 400
+      ? false
+      : true;
   res.statusCode = code;
   const response: Record<string, unknown> = {
     status,
@@ -47,13 +52,25 @@ export function respond(route: ControllerRoute): ApiMiddleware {
           const files = Object.keys(route.body.multipart.files).filter(
             (file) => !!route.body?.multipart?.files[file].req
           );
-          if ((req.files?.length || 0) !== files.length) {
+          if (Object.keys(req.files || {}).length < files.length) {
             return sendResponse(res, {
               errors: files
             });
           }
+          for (const file of Object.entries(req.files || {})) {
+            if (file[1].size > route.body.multipart.files[file[0]].maxSize) {
+              return sendResponse(res, {
+                code: 413,
+                errors: [file[0]]
+              });
+            }
+          }
         }
-        const validation = await validate(route.body.dto, req.body || {});
+        const validation = await validate(
+          route.body.dto,
+          req.body || {},
+          !!route.body.multipart
+        );
         if (validation !== true) {
           if (validation === null) {
             return sendResponse(res, 413);

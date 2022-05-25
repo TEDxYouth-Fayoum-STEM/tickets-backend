@@ -6,6 +6,7 @@ export default {
   // server
   port: parseInt(<string>process.env.PORT) || 3000,
   host: <string>process.env.HOST,
+  frontendHost: <string>process.env.FRONTEND_HOST,
   // request limits
   req: {
     maxBodySize: parseInt(<string>process.env.MAX_REQ_BODY_SIZE) * 1024,

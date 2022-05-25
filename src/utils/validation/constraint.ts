@@ -55,6 +55,9 @@ export default function constraint(
         propertyKey
       );
     }
-    Expose({ groups: allowedAt });
+    Expose({ groups: allowedAt })(
+      target as Record<string, unknown>,
+      propertyKey
+    );
   };
 }

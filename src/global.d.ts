@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { UploadApiOptions, UploadApiResponse } from "cloudinary";
 import { IDb } from "./db/middleware";
 import { ClassConstructor } from "class-transformer";
 
@@ -18,6 +19,10 @@ declare global {
   namespace Express {
     interface Request {
       db: IDb;
+      cloud: (
+        buffer: Buffer,
+        options: UploadApiOptions
+      ) => Promise<UploadApiResponse>;
     }
   }
 

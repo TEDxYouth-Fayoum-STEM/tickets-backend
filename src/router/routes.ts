@@ -35,13 +35,11 @@ export function bootstrapRoutes(
             if (
               file.mimetype.match(
                 <RegExp>route.body?.multipart?.files[file.fieldname].mimetype
-              ) ||
-              file.size >
-                <number>route.body?.multipart?.files[file.fieldname].maxSize
+              )
             ) {
-              cb(new MulterError("LIMIT_FILE_SIZE", file.fieldname));
-            } else {
               cb(null, true);
+            } else {
+              cb(new MulterError("LIMIT_FILE_SIZE", file.fieldname));
             }
           }
         }).fields(fields);
