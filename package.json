@@ -8,7 +8,7 @@
   "scripts": {
     "bootstrap": "husky install",
     "dev": "nodemon src/app.ts",
-    "build": "tsc --build",
+    "start": "ts-node -T -r tsconfig-paths/register src/app.ts",
     "format": "prettier",
     "lint": "eslint",
     "lint-staged": "lint-staged"
