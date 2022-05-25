@@ -6,6 +6,7 @@
   "license": "MIT",
   "main": "build/app.js",
   "scripts": {
+    "bootstrap": "husky install",
     "dev": "nodemon src/app.ts",
     "build": "tsc --build",
     "format": "prettier",
